@@ -177,6 +177,7 @@ class BumpVersion:
         :type file_path: str
         """
         try:
+            # Use the provided file_path or the default one
             self.read_version_from_file(file_path=file_path)
 
             # Increment the specified version component

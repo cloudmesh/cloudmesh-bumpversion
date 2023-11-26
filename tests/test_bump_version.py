@@ -1,3 +1,5 @@
+# pytest -v --capture=no  tests/test_bump_version.py
+
 import os
 import pytest
 from cloudmesh.bumpversion.bumpversion import BumpVersion

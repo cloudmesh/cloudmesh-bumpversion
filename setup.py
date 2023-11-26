@@ -80,5 +80,4 @@ setup(
         "pytests"
     ],
     zip_safe=False,
-    # namespace_packages=['cloudmesh'],
 )
