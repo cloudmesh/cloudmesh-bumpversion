@@ -1,14 +1,10 @@
-from cloudmesh.shell.command import command
-from cloudmesh.shell.command import PluginCommand
-from cloudmesh.common.console import Console
-from cloudmesh.common.util import path_expand
-from pprint import pprint
-from cloudmesh.common.debug import VERBOSE
-from cloudmesh.shell.command import map_parameters
-from cloudmesh.common.parameter import Parameter
-from cloudmesh.common.variables import Variables
-from cloudmesh.common.util import banner
 from cloudmesh.bumpversion.bumpversion import BumpVersion
+from cloudmesh.common.debug import VERBOSE
+from cloudmesh.common.util import banner
+from cloudmesh.shell.command import PluginCommand
+from cloudmesh.shell.command import command
+from cloudmesh.shell.command import map_parameters
+
 
 class BumpversionCommand(PluginCommand):
 
@@ -46,17 +42,16 @@ class BumpversionCommand(PluginCommand):
             It increase the specified number
             It writes the number to the files
             ./VERSION
-            ./cloudmesh/cloudmesh-PACKAGE/__init__.py
             ./cloudmesh/cloudmesh-PACKAGE/__version__.py
 
             > cms bumpversion patch
-            >    increaments the third number
+            >    increments the third number
 
             > cms bumpversion minor
-            >    increaments the second number number
+            >    increments the second number
 
             > cms bumpversion mayor
-            >    increaments the first number number
+            >    increments the first number
 
             > cms bumpversion info
             >    lists the numbers and identifies if one of them is wrong
@@ -70,13 +65,11 @@ class BumpversionCommand(PluginCommand):
             > Example: bumpversion.yaml
             >
             > bumpversion:
-            > - cloudmesh/bumpversion/__init__.py
             > - cloudmesh/bumpversion/__version__.py
             > - VERSION
 
 
         """
-
 
         # arguments.FILE = arguments['--file'] or None
 
@@ -87,7 +80,6 @@ class BumpversionCommand(PluginCommand):
             bump_version = BumpVersion()
 
             bump_version.info()
-
 
             new_version = bump_version.incr(component)
 
@@ -100,11 +92,6 @@ class BumpversionCommand(PluginCommand):
 
                 package = bump_version.read_package_name_from_setup().replace("-", "/")
 
-                # Update version in bumpversion/{package}/__init__.py
-                init_file_path = f"{package}/__init__.py"  # Change this to the actual path of your __init__.py file
-                bump_version.update_version_in_file(init_file_path, new_version, version_variable="__version__")
-
-                # Example 2: Update version in bumpversion/version.py
                 version_file_path = f"{package}/__version__.py"  # Change this to the actual path of your version.py file
                 bump_version.update_version_in_file(version_file_path, new_version, version_variable="version")
 
@@ -147,14 +134,8 @@ class BumpversionCommand(PluginCommand):
 
                 package = bump_version.read_package_name_from_setup().replace("-", "/")
 
-                # Update version in bumpversion/{package}/__init__.py
-                init_file_path = f"{package}/__init__.py"  # Change this to the actual path of your __init__.py file
-                bump_version.update_version_in_file(init_file_path, new_version, version_variable="__version__")
-
-                # Example 2: Update version in bumpversion/version.py
                 version_file_path = f"{package}/__version__.py"  # Change this to the actual path of your version.py file
                 bump_version.update_version_in_file(version_file_path, new_version, version_variable="version")
-
 
                 bump_version.read_version_from_file()
                 bump_version.info()
@@ -169,7 +150,6 @@ class BumpversionCommand(PluginCommand):
 
             bump_version.change_files(new_version)
 
-            print ("AAA")
-
+            print("AAA")
 
         return ""

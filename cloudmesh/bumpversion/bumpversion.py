@@ -1,9 +1,10 @@
 import re
 import yaml
-import fileinput
+
 
 class BumpVersion:
     def __init__(self, file_path="./VERSION"):
+        self.package_name = None
         self.file_path = file_path
         self.version = None  # Initialize version to None
 
@@ -39,9 +40,11 @@ class BumpVersion:
         except Exception as e:
             print(f"Error: {e}")
 
-    def verify_version_format(self, version):
+    @staticmethod
+    def verify_version_format(version):
         try:
             # Split version into major, minor, and patch components
+            # noinspection PyUnusedLocal
             major, minor, patch = map(int, version.split('.'))
             return True
         except ValueError:
@@ -109,7 +112,6 @@ class BumpVersion:
         else:
             print("Invalid version format. Please provide a version in X.X.X format.")
 
-
     def read_package_name_from_setup(self):
         try:
             with open("setup.py", 'r') as file:
@@ -140,8 +142,8 @@ class BumpVersion:
         the bumpversion yaml file looks like
 
         bumpversion:
-        - cloudmesh/bumpversion/__init__.py
         - cloudmesh/bumpversion/__version__.py
+        - VERSION
 
         """
         try:
