@@ -24,14 +24,18 @@ class BumpversionCommand(PluginCommand):
                 bumpversion major
                 bumpversion info
                 bumpversion set --version=VERSION
+                bumpversion --config=YAML --version=VERSION
+
 
           Manages bumping the version for cloudmesh
 
           Arguments:
               VERSION  the version number to set
+              YAML  the yaml file name
 
           Options:
               --version=VERSION   the version number to set
+              --config=YAML   the YAML FILE
 
           Description:
 
@@ -54,11 +58,22 @@ class BumpversionCommand(PluginCommand):
             > cms bumpversion mayor
             >    increaments the first number number
 
-            > bumpversion info
+            > cms bumpversion info
             >    lists the numbers and identifies if one of them is wrong
 
-            > bumpversion set --version=VERSION
+            > cms bumpversion set --version=VERSION
             >   sets the version number to the spcified number
+
+            > cms bumpversion --config=YAML --version=VERSION
+            >   sets the versions in the files specifed in the yaml file
+
+            > Example: bumpversion.yaml
+            >
+            > bumpversion:
+            > - cloudmesh/bumpversion/__init__.py
+            > - cloudmesh/bumpversion/__version__.py
+            > - VERSION
+
 
         """
 
@@ -67,19 +82,49 @@ class BumpversionCommand(PluginCommand):
 
         # switch debug on
 
+        def update(component):
 
-        map_parameters(arguments, "version")
+            bump_version = BumpVersion()
+
+            bump_version.info()
+
+
+            new_version = bump_version.incr(component)
+
+            banner(new_version)
+
+            if bump_version.verify_version_format(new_version):
+                bump_version.update_version(new_version)
+                bump_version.read_version_from_file()
+                bump_version.info()
+
+                package = bump_version.read_package_name_from_setup().replace("-", "/")
+
+                # Update version in bumpversion/{package}/__init__.py
+                init_file_path = f"{package}/__init__.py"  # Change this to the actual path of your __init__.py file
+                bump_version.update_version_in_file(init_file_path, new_version, version_variable="__version__")
+
+                # Example 2: Update version in bumpversion/version.py
+                version_file_path = f"{package}/__version__.py"  # Change this to the actual path of your version.py file
+                bump_version.update_version_in_file(version_file_path, new_version, version_variable="version")
+
+                bump_version.read_version_from_file()
+                bump_version.info()
+            else:
+                print("Invalid version format. Please provide a version in X.X.X format with integer components.")
+
+        map_parameters(arguments, "version", "config")
 
         VERBOSE(arguments)
 
         if arguments.patch:
-            Console.error("not implemented")
+            update("patch")
 
         elif arguments.minor:
-            Console.error("not implemented")
+            update("minor")
 
-        elif arguments.mayor:
-            Console.error("not implemented")
+        elif arguments.major:
+            update("major")
 
         elif arguments.info:
             version_file_path = "VERSION"  # Change this to the actual path of your VERSION file
@@ -116,6 +161,15 @@ class BumpversionCommand(PluginCommand):
             else:
                 print("Invalid version format. Please provide a version in X.X.X format with integer components.")
 
+        elif arguments.config:
+
+            bump_version = BumpVersion()
+            bump_version.info()
+            new_version = arguments.version
+
+            bump_version.change_files(new_version)
+
+            print ("AAA")
 
 
         return ""

@@ -1,4 +1,6 @@
 import re
+import yaml
+import fileinput
 
 class BumpVersion:
     def __init__(self, file_path="./VERSION"):
@@ -126,3 +128,71 @@ class BumpVersion:
         except Exception as e:
             print(f"Error: {e}")
             return None
+
+    def _read_files_to_change(self, yaml_file="bumpversion.yaml"):
+        """
+
+        :param yaml_file:
+        :type yaml_file:
+        :return:
+        :rtype:
+
+        the bumpversion yaml file looks like
+
+        bumpversion:
+        - cloudmesh/bumpversion/__init__.py
+        - cloudmesh/bumpversion/__version__.py
+
+        """
+        try:
+            with open(yaml_file, 'r') as file:
+                yaml_data = yaml.safe_load(file)
+
+            if 'bumpversion' in yaml_data and isinstance(yaml_data['bumpversion'], list):
+                self.files_to_change = yaml_data['bumpversion']
+                return self.files_to_change
+            else:
+                print(f"Error: Invalid or missing 'bumpversion' in {yaml_file}.")
+                return None
+
+        except Exception as e:
+            print(f"Error: {e}")
+            return None
+
+    def change_files(self, new_version):
+
+        files = self._read_files_to_change(yaml_file="bumpversion.yaml")
+
+        for file_path in files:
+            self.update_version_in_file(file_path, new_version, version_variable="__version__")
+            self.update_version_in_file(file_path, new_version, version_variable="version")
+
+    def incr(self, component, file_path="./VERSION"):
+        """
+        Increments the specified version component (major, minor, or patch) in the specified file.
+
+        :param component: The version component to increment (major, minor, or patch).
+        :type component: str
+        :param file_path: The path to the file containing the version information. If None, the default file_path is used.
+        :type file_path: str
+        """
+        try:
+            self.read_version_from_file(file_path=file_path)
+
+            # Increment the specified version component
+            if component == "major":
+                self.version['major'] += 1
+            elif component == "minor":
+                self.version['minor'] += 1
+            elif component == "patch":
+                self.version['patch'] += 1
+            else:
+                print("Error: Invalid component. Use 'major', 'minor', or 'patch'.")
+                return
+
+            # Format the new version string
+            new_version_str = f"{self.version['major']}.{self.version['minor']}.{self.version['patch']}"
+            return new_version_str
+
+        except Exception as e:
+            print(f"Error: {e}")

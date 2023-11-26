@@ -97,15 +97,6 @@ release: clean
 	# pip install -U cloudmesh-common
 
 
-dev:
-	bump2version --new-version "$(VERSION)-dev0" part --allow-dirty
-	bump2version patch --allow-dirty
-	@cat VERSION
-	@echo
-
-reset:
-	bump2version --new-version "4.0.0-dev0" part --allow-dirty
-
 upload:
 	twine check dist/*
 	twine upload dist/*
@@ -121,11 +112,4 @@ log:
 	git commit -m "chg: dev: Update ChangeLog" ChangeLog
 	git push
 
-# bump:
-#	git checkout main
-#	git pull
-#	tox
-#	python setup.py sdist bdist_wheel upload
-#	bumpversion --no-tag patch
-#	git push origin main --tags
 
