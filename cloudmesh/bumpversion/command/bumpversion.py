@@ -134,9 +134,15 @@ class BumpversionCommand(PluginCommand):
 
                 package = bump_version.read_package_name_from_setup().replace("-", "/")
 
-                version_file_path = f"{package}/__version__.py"  # Change this to the actual path of your version.py file
-                bump_version.update_version_in_file(version_file_path, new_version, version_variable="version")
-
+                for version_file_path in  [f"{package}/__version__.py", f"{package}/__init__.py", f".bumpversion.cfg"]:
+                    try:
+                        bump_version.update_version_in_file(version_file_path, new_version, version_variable="version")
+                    except:
+                        pass
+                    try:
+                        bump_version.update_version_in_file(version_file_path, new_version, version_variable="__version__")
+                    except:
+                        pass
                 bump_version.read_version_from_file()
                 bump_version.info()
             else:
