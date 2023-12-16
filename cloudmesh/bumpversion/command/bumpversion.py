@@ -90,12 +90,21 @@ class BumpversionCommand(PluginCommand):
                 bump_version.read_version_from_file()
                 bump_version.info()
 
-                package = bump_version.read_package_name_from_setup().replace("-", "/")
+                package = bump_version.read_package_name_from_toml("pyproject.toml")
+                if package is None:
+                    package = bump_version.read_package_name_from_setup().replace("-", "/")
 
                 version_file_path = f"{package}/__version__.py"  # Change this to the actual path of your version.py file
                 bump_version.update_version_in_file(version_file_path, new_version, version_variable="version")
+                print()
+
+                toml_file_path = f"pyproject.toml"  # Change this to the actual path of your version.py file
+                bump_version.update_version_in_file(toml_file_path, new_version, version_variable="version")
+                print()
 
                 bump_version.read_version_from_file()
+                print()
+
                 bump_version.info()
             else:
                 print("Invalid version format. Please provide a version in X.X.X format with integer components.")

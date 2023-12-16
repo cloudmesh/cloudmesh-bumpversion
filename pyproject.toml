@@ -49,6 +49,7 @@ classifiers = [
 ]
 
 dependencies = [
+    "toml",
     "cloudmesh-cmd5",
 ]
 [project.urls]

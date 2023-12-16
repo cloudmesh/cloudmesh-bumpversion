@@ -1,5 +1,6 @@
 import re
 import yaml
+import toml
 
 
 class BumpVersion:
@@ -111,6 +112,31 @@ class BumpVersion:
             print("Updated version:", self.version)
         else:
             print("Invalid version format. Please provide a version in X.X.X format.")
+
+
+    def read_package_name_from_toml(self, filename="pyproject.toml"):
+        """
+        Reads the 'name' value from the '[project]' section in a TOML file.
+
+        Parameters:
+        - toml_file_path (str): Path to the TOML file.
+
+        Returns:
+        - str: The value of 'name' if found, otherwise None.
+        """
+
+        try:
+            data = toml.load(filename)
+            project_name = data.get('project', {}).get('name')
+
+            return project_name
+
+        except FileNotFoundError:
+            print(f"File not found: {filename}")
+            return None
+        except toml.TomlDecodeError as e:
+            print(f"Error decoding TOML: {e}")
+            return None
 
     def read_package_name_from_setup(self):
         try:
