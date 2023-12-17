@@ -57,4 +57,4 @@ dependencies = [
 
 [tool.setuptools.packages.find]
 where = ["src/"]
-include = ["cloudmesh.bumpversion"]
+include = ["cloudmesh.bumpversion", "cloudmesh.bumpversion.*"]
