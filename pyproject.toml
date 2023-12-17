@@ -8,10 +8,10 @@ requires = [
 
 [project]
 name = "cloudmesh-bumpversion"
-version = "5.0.15"
+version = "5.0.16"
 description = "A set of useful APIs for cloudmesh"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.8"
 license = {file = "LICENSE"}
 authors = [
   {name = "Gregor von Laszewski", email = "laszewski@gmail.com"}
@@ -55,9 +55,12 @@ dependencies = [
 [project.urls]
 "Documentation" = "https://github.com/cloudmesh/cloudmesh-common"
 
-
 [tool.setuptools.packages.find]
-where = ["."]  # list of folders that contain the packages (["."] by default)
-include = ["cloudmesh"]  # package names should match these glob patterns (["*"] by default)
-exclude = ["deprecated", "deprecated.**", "tests", "tests.*", "examples"]
-namespaces = true
+where = ["src/"]
+include = ["cloudmesh.bumpversion"]
+
+#[tool.setuptools.packages.find]
+#where = ["."]  # list of folders that contain the packages (["."] by default)
+#include = ["cloudmesh"]  # package names should match these glob patterns (["*"] by default)
+#exclude = ["deprecated", "deprecated.**", "tests", "tests.*", "examples"]
+#namespaces = true
