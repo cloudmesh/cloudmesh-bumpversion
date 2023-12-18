@@ -4,12 +4,57 @@ import toml
 
 
 class BumpVersion:
+    """
+    BumpVersion Class
+
+    This class provides functionality for bumping version numbers in files, updating package information,
+    and managing version-related tasks.
+
+    Methods:
+        - __init__(file_path="./VERSION"): Initialize the BumpVersion class.
+        - info(): Display information about the BumpVersion instance.
+        - read_version_from_file(file_path="./VERSION"): Read and parse the version from a file.
+        - verify_version_format(version): Verify the format of the provided version.
+        - update_version(new_version): Update the version in the file with the provided version.
+        - update_version_in_file(file_path, new_version, version_variable="__version__"): Update version in a specific file.
+        - read_package_name_from_toml(filename="pyproject.toml"): Read package name from a TOML file.
+        - read_package_name_from_setup(): Read package name from setup.py.
+        - _read_files_to_change(yaml_file="bumpversion.yaml"): Read files to change from a YAML configuration file.
+        - change_files(new_version): Change version in multiple files specified in a YAML configuration file.
+        - incr(component, file_path="./VERSION"): Increment a specified version component.
+
+    Usage:
+        bump_version_instance = BumpVersion()
+        bump_version_instance.info()
+
+        new_version = bump_version_instance.incr("patch")
+        bump_version_instance.update_version(new_version)
+    """
+
     def __init__(self, file_path="./VERSION"):
+        """
+        Initialize the BumpVersion class.
+
+        Args:
+            file_path (str): Path to the file containing the version information. Default is "./VERSION".
+
+        Returns:
+            None
+        """
         self.package_name = None
         self.file_path = file_path
         self.version = None  # Initialize version to None
 
     def info(self):
+        """
+        Display information about the BumpVersion instance.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         print(f"File Path: {self.file_path}")
         if self.version:
             print(f"Current Version: {self.version['major']}.{self.version['minor']}.{self.version['patch']}")
@@ -17,6 +62,15 @@ class BumpVersion:
             print("Version information not available. Use read_version_from_file method to read the version.")
 
     def read_version_from_file(self, file_path="./VERSION"):
+        """
+         Read and parse the version from a file.
+
+         Args:
+             file_path (str): Path to the file containing the version information. Default is "./VERSION".
+
+         Returns:
+             None
+         """
         try:
             # Use the provided file_path or the default one
             file_path = file_path or self.file_path
@@ -43,6 +97,15 @@ class BumpVersion:
 
     @staticmethod
     def verify_version_format(version):
+        """
+        Verify the format of the provided version.
+
+        Args:
+            version (str): The version string to be verified.
+
+        Returns:
+            bool: True if the version has the correct format, False otherwise.
+        """
         try:
             # Split version into major, minor, and patch components
             # noinspection PyUnusedLocal
@@ -52,6 +115,18 @@ class BumpVersion:
             return False
 
     def update_version(self, new_version):
+        """
+        Update version in a specific file.
+
+        Args:
+            file_path (str): Path to the file.
+            new_version (str): The new version string.
+            version_variable (str): The variable name containing the version. Default is "__version__".
+
+        Returns:
+            None
+        """
+
         try:
             # Verify the format of the new version
             if not self.verify_version_format(new_version):
@@ -85,6 +160,18 @@ class BumpVersion:
             print(f"Error: {e}")
 
     def update_version_in_file(self, file_path, new_version, version_variable="__version__"):
+        """
+        Update version in a specific file.
+
+        Args:
+            file_path (str): Path to the file.
+            new_version (str): The new version string.
+            version_variable (str): The variable name containing the version. Default is "__version__".
+
+        Returns:
+            None
+        """
+
         try:
             # Read the content of the file
             with open(file_path, 'r') as file:
@@ -139,6 +226,15 @@ class BumpVersion:
             return None
 
     def read_package_name_from_setup(self):
+        """
+        Read package name from setup.py. We recommend to switch to pyproject.toml
+
+        Args:
+            None
+
+        Returns:
+            str: The package name if found, otherwise None.
+        """
         try:
             with open("setup.py", 'r') as file:
                 content = file.read()
@@ -159,17 +255,20 @@ class BumpVersion:
 
     def _read_files_to_change(self, yaml_file="bumpversion.yaml"):
         """
+        Read files to change from a YAML configuration file.
 
-        :param yaml_file:
-        :type yaml_file:
-        :return:
-        :rtype:
+        Args:
+            yaml_file (str): Path to the YAML file.
 
-        the bumpversion yaml file looks like
+        Returns:
+            list or None: List of files to change or None if there is an error.
 
-        bumpversion:
-        - cloudmesh/bumpversion/__version__.py
-        - VERSION
+        Example:
+            The bumpversion yaml file looks like
+
+            bumpversion:
+            - src/cloudmesh/bumpversion/__version__.py
+            - VERSION
 
         """
         try:
@@ -188,7 +287,15 @@ class BumpVersion:
             return None
 
     def change_files(self, new_version):
+        """
+        Change version in multiple files specified in a YAML configuration file.
 
+        Args:
+            new_version (str): The new version string.
+
+        Returns:
+            None
+        """
         files = self._read_files_to_change(yaml_file="bumpversion.yaml")
 
         for file_path in files:
@@ -197,13 +304,16 @@ class BumpVersion:
 
     def incr(self, component, file_path="./VERSION"):
         """
-        Increments the specified version component (major, minor, or patch) in the specified file.
+        Increment a specified version component.
 
-        :param component: The version component to increment (major, minor, or patch).
-        :type component: str
-        :param file_path: The path to the file containing the version information. If None, the default file_path is used.
-        :type file_path: str
+        Args:
+            component (str): The version component to increment (major, minor, or patch).
+            file_path (str): Path to the file containing the version information. If None, the default file_path is used.
+
+        Returns:
+            str or None: The new version string or None if there is an error.
         """
+
         try:
             # Use the provided file_path or the default one
             self.read_version_from_file(file_path=file_path)
