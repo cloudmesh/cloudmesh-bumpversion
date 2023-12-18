@@ -9,7 +9,7 @@ requires = [
 [project]
 name = "cloudmesh-bumpversion"
 version = "5.0.17"
-description = "A set of useful APIs for cloudmesh"
+description = "A cloudmesh command to bump the version in cloudmesh projects"
 readme = "README.md"
 requires-python = ">=3.8"
 license = {file = "LICENSE"}
