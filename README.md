@@ -1,5 +1,4 @@
-The cloudmesh bumpversion command
-=================================
+# The cloudmesh bumpversion command
 
 ![GitHub Repo](https://img.shields.io/badge/github-repo-green.svg)](https://github.com/cloudmesh/cloudmesh-bumpversion)
 [![image](https://img.shields.io/pypi/pyversions/cloudmesh-bumpversion.svg)](https://pypi.org/project/cloudmesh-bumpversion)
