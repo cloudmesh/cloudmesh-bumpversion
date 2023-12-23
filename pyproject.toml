@@ -8,7 +8,7 @@ requires = [
 
 [project]
 name = "cloudmesh-bumpversion"
-version = "5.0.17"
+version = "5.0.18"
 description = "A cloudmesh command to bump the version in cloudmesh projects"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -50,7 +50,6 @@ classifiers = [
 
 dependencies = [
     "toml",
-    "cloudmesh-cmd5",
 ]
 
 [project.urls]
@@ -62,4 +61,7 @@ Changelog = "https://github.com/cloudmesh/cloudmesh-bumpversion/blob/main/CHANGE
 
 [tool.setuptools.packages.find]
 where = ["src/"]
-include = ["cloudmesh.bumpversion", "cloudmesh.bumpversion.*"]
+# include = ["bumpversion", "cloudmesh.bumpversion.*"]
+
+[project.scripts]
+bumpversion = "bumpversion.bumpversion_command:main"

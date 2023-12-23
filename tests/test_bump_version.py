@@ -2,7 +2,7 @@
 
 import os
 import pytest
-from cloudmesh.bumpversion.bumpversion import BumpVersion
+from bumpversion.bumpversion import BumpVersion
 
 @pytest.fixture
 def setup_bump_version():
