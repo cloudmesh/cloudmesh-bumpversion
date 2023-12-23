@@ -184,7 +184,12 @@ class BumpVersion:
 
             # Find the line containing the specified version variable
             for i, line in enumerate(lines):
-                if re.search(fr'{version_variable}\s*=\s*"\d+\.\d+\.\d+"', line):
+                if version_variable == "version:":
+                    if re.search(fr'{version_variable}\s*:\s*"\d+\.\d+\.\d+"', line):
+                        # replace the version number after the : with the new version
+                        parts = line.split(':', 1) 
+                        lines[i] = parts[0] + ': "' + new_version + '"\n'  
+                elif re.search(fr'{version_variable}\s*=\s*"\d+\.\d+\.\d+"', line):
                     lines[i] = f'{version_variable} = "{new_version}"\n'
                     break
 
