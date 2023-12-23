@@ -186,6 +186,7 @@ class BumpVersion:
             for i, line in enumerate(lines):
                 if version_variable == "version:":
                     if re.search(fr'{version_variable}\s*:\s*"\d+\.\d+\.\d+"', line):
+                        print("LLLL", line)
                         # replace the version number after the : with the new version
                         parts = line.split(':', 1) 
                         lines[i] = parts[0] + ': "' + new_version + '"\n'  
@@ -286,7 +287,8 @@ class BumpVersion:
             print(new_version, "->", file_path)
             self.update_version_in_file(file_path, new_version, version_variable="__version__")
             self.update_version_in_file(file_path, new_version, version_variable="version")
-
+            # self.update_version_in_file(file_path, new_version, version_variable="version:")
+            
     def incr(self, component, file_path="./VERSION"):
         """
         Increment a specified version component.
