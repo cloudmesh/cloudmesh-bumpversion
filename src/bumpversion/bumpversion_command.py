@@ -26,7 +26,7 @@
     It increase the specified number
     It writes the number to the files
     ./VERSION
-    ./src/cloudmesh/PACKAGE/__version__.py
+    ./src/cloudmesh/PACKAGE/__init__.py
 
     > cms bumpversion patch
     >    increments the third number
@@ -49,7 +49,7 @@
     > Example: bumpversion.yaml
     >
     > bumpversion:
-    > - src/cloudmesh/bumpversion/__version__.py
+    > - src/cloudmesh/bumpversion/__init__.py
     > - VERSION
 
 

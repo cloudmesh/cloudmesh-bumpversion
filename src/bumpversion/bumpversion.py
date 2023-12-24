@@ -252,7 +252,7 @@ class BumpVersion:
             The bumpversion yaml file looks like
 
             bumpversion:
-            - src/cloudmesh/bumpversion/__version__.py
+            - src/cloudmesh/bumpversion/__init__.py
             - VERSION
 
         """
