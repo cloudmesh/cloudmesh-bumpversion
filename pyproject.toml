@@ -50,6 +50,8 @@ classifiers = [
 
 dependencies = [
     "toml",
+    "pyyaml",
+    "docopt"
 ]
 
 [project.urls]
@@ -61,7 +63,7 @@ Changelog = "https://github.com/cloudmesh/cloudmesh-bumpversion/blob/main/CHANGE
 
 [tool.setuptools.packages.find]
 where = ["src"]
-# include = ["bumpversion", "cloudmesh.bumpversion.*"]
+include = ["bumpversion", "bumpversion.*"]
 
 [project.scripts]
 bumpversion = "bumpversion.bumpversion_command:main"

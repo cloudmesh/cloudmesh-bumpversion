@@ -22,7 +22,7 @@
     this program modifies the following files.
 
     It reads the VERSION form the ./VERSION file
-    the number is of the form MAYOR.MINOR.PATCH
+    the number is of the form MAJOR.MINOR.PATCH
     It increase the specified number
     It writes the number to the files
     ./VERSION
