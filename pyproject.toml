@@ -6,12 +6,9 @@ requires = [
     "pip >= 23.2.1"
 ]
 
-[tool.setuptools.dynamic]
-version = {attr = "cloudmesh.bumpversion.__version__"}
-
 [project]
 name = "cloudmesh-bumpversion"
-dynamic = ["version"]
+version = "5.0.25"
 description = "A cloudmesh command to bump the version in cloudmesh projects"
 readme = "README.md"
 requires-python = ">=3.8"

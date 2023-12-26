@@ -28,22 +28,22 @@
     ./VERSION
     ./src/cloudmesh/PACKAGE/__init__.py
 
-    > cms bumpversion patch
+    > bumpversion patch
     >    increments the third number
 
-    > cms bumpversion minor
+    > bumpversion minor
     >    increments the second number
 
-    > cms bumpversion mayor
+    > bumpversion mayor
     >    increments the first number
 
-    > cms bumpversion info
+    > bumpversion info
     >    lists the numbers and identifies if one of them is wrong
 
-    > cms bumpversion set --version=VERSION
+    > bumpversion set --version=VERSION
     >   sets the version number to the spcified number
 
-    > cms bumpversion --config=YAML --version=VERSION
+    > bumpversion --config=YAML --version=VERSION
     >   sets the versions in the files specifed in the yaml file
 
     > Example: bumpversion.yaml
