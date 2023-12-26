@@ -60,7 +60,7 @@ Issues = "https://github.com/cloudmesh/cloudmesh-bumpversion/issues"
 Changelog = "https://github.com/cloudmesh/cloudmesh-bumpversion/blob/main/CHANGELOG.md"
 
 [tool.setuptools.packages.find]
-where = ["src/"]
+where = ["src"]
 # include = ["bumpversion", "cloudmesh.bumpversion.*"]
 
 [project.scripts]
