@@ -1,6 +1,6 @@
 # The cloudmesh bumpversion command
 
-[![GitHub Repo](https://img.shields.io/badge/github-repo-green.svg)](https://github.com/cloudmesh/cloudmesh-bumpversion)
+![GitHub Repo](https://img.shields.io/badge/github-repo-green.svg)](https://github.com/cloudmesh/cloudmesh-bumpversion)
 [![image](https://img.shields.io/pypi/pyversions/cloudmesh-bumpversion.svg)](https://pypi.org/project/cloudmesh-bumpversion)
 [![image](https://img.shields.io/pypi/v/cloudmesh-bumpversion.svg)](https://pypi.org/project/cloudmesh-bumpversion/)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
@@ -15,9 +15,12 @@
 [![macOS](https://img.shields.io/badge/OS-macOS-lightgrey.svg)](https://www.apple.com/macos)
 [![Windows](https://img.shields.io/badge/OS-Windows-blue.svg)](https://www.microsoft.com/windows)
 
-## Manual Page
+see cloudmesh.cmd5
 
-```
+* https://github.com/cloudmesh/cloudmesh.cmd5
+
+
+::
 
   Usage:
         bumpversion patch
@@ -43,7 +46,7 @@
     this program modifies the following files.
 
     It reads the VERSION form the ./VERSION file
-    the number is of the form MAYOR.MINOR.PATCH
+    the number is of the form MAJOR.MINOR.PATCH
     It increase the specified number
     It writes the number to the files
     ./VERSION
@@ -73,44 +76,6 @@
     > - cloudmesh/bumpversion/__version__.py
     > - VERSION
 
-```
 
-## Manual Page
 
-<!-- START-MANUAL -->
-```
-Command bar
-===========
-
-::
-
-  Usage:
-        bar --file=FILE
-        bar list
-        bar [--parameter=PARAMETER] [--experiment=EXPERIMENT] [COMMAND...]
-
-  This command does some useful things.
-
-  Arguments:
-      FILE   a file name
-      PARAMETER  a parameterized parameter of the form "a[0-3],a5"
-
-  Options:
-      -f      specify the file
-
-  Description:
-
-    > cms bar --parameter="a[1-2,5],a10"
-    >    example on how to use Parameter.expand. See source code at
-    >      https://github.com/cloudmesh/cloudmesh-bar/blob/main/cloudmesh/bar/command/bar.py
-    >    prints the expanded parameter as a list
-    >    ['a1', 'a2', 'a3', 'a4', 'a5', 'a10']
-
-    > bar exp --experiment=a=b,c=d
-    > example on how to use Parameter.arguments_to_dict. See source code at
-    >      https://github.com/cloudmesh/cloudmesh-bar/blob/main/cloudmesh/bar/command/bar.py
-    > prints the parameter as dict
-    >   {'a': 'b', 'c': 'd'}
-
-```
-<!-- STOP-MANUAL -->
+# Timer: 0.0031s Load: 0.2415s help bumpversion
