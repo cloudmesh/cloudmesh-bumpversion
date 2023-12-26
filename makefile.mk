@@ -19,6 +19,9 @@ source: welcome ## Install the package in source mode
 pip: welcome ## Install the package in pip mode
 	pip install -e . # --config-settings editable_mode=strict
 
+readme:	
+	echo "Automatic creatin for bumpversion is not supported"
+	
 ##############################################################################
 # CHECK
 ##############################################################################
